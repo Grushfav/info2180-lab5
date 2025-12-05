@@ -1,17 +1,173 @@
-<?php
-$host = 'localhost';
-$username = 'lab5_user';
-$password = '';
-$dbname = 'world';
+/* UI styles for World Database Lookup */
+:root{
+	--bg:#f6f9fb;
+	--accent:#3b5568;
+	--accent-2:#2f4050;
+	--muted:#6b7b86;
+	--primary:#3aa0c9;
+	--white:#fff;
+	--max-width:980px;
+}
+*{
+        box-sizing: border-box
+    }
 
-$conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
-$stmt = $conn->query("SELECT * FROM countries");
+    body {
+        font-family: Inter, Segoe UI, Arial, Helvetica, sans-serif;
+        margin: 0;
+        background: var(--bg);
+        color: #24343f
+    }
 
-$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    .site-header {
+        background: var(--accent-2);
+        color: var(--white);
+        padding: 28px 0
+    }
 
-?>
-<ul>
-<?php foreach ($results as $row): ?>
-  <li><?= $row['name'] . ' is ruled by ' . $row['head_of_state']; ?></li>
-<?php endforeach; ?>
-</ul>
+    .header-inner {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        padding: 0 20px
+    }
+
+    .logo {
+        width: 84px;
+        height: 84px;
+        border-radius: 50%;
+        overflow: hidden;
+        flex: 0 0 84px
+    }
+
+    .site-title {
+        font-size: 28px;
+        margin: 0;
+        font-weight: 700;
+        letter-spacing: 0.4px
+    }
+
+    .container {
+        max-width: var(--max-width);
+        margin: 36px auto;
+        padding: 0 20px
+    }
+
+    .search-area {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 18px
+    }
+
+    .search-controls {
+        width: 100%;
+        max-width: 720px;
+        display: flex;
+        gap: 12px;
+        align-items: center
+    }
+
+    .search-controls input[type=search] {
+        flex: 1;
+        padding: 10px 14px;
+        border: 1px solid #d6e0e6;
+        border-radius: 6px;
+        font-size: 15px;
+        background: #fff
+    }
+    .buttons-area {
+        display: flex;
+        justify-content: center;
+        margin-top: 12px;
+        margin-bottom: 12px
+
+    }
+    .buttons {
+    
+        display: flex;
+        justify-content: center;
+        gap: 8px
+    }
+
+    .btn {
+        padding: 9px 14px;
+        border-radius: 6px;
+        border: 1px solid transparent;
+        background: rgb(59, 148, 59);
+        color: var(--accent-2);
+        cursor: pointer;
+        font-weight: 600
+    }
+
+    .btn.primary {
+        background: var(--primary);
+        color: var(--white);
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04)
+    }
+
+    .btn:hover {
+        opacity: 0.95
+    }
+
+    .result-area {
+        background: var(--white);
+        border-radius: 8px;
+        padding: 18px;
+        border: 1px solid #e6edf2;
+        box-shadow: 0 4px 20px rgba(46, 61, 73, 0.06)
+    }
+
+    .table-wrap {
+        overflow: auto
+    }
+
+    table.results {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 8px
+    }
+
+    table.results th,
+    table.results td {
+        padding: 10px 12px;
+        border-bottom: 1px solid #eef3f6;
+        text-align: left
+    }
+
+    table.results th {
+        background: #f8fbfd;
+        color: var(--muted);
+        font-weight: 600
+    }
+
+    table.results tr:nth-child(even) {
+        background: #fbfdff
+    }
+
+    .empty {
+        padding: 24px;
+        text-align: center;
+        color: var(--muted)
+    }
+
+    .status {
+        font-size: 14px;
+        color: var(--muted);
+        margin-bottom: 8px
+    }
+
+
+/* external image logo styling */
+.logo img.logo-img{display:block;width:100%;height:100%;object-fit:cover;border-radius:50%}
+
+@media (max-width:640px){
+	.header-inner{padding:0 12px}
+	.site-title{font-size:20px}
+	.logo{width:56px;height:56px}
+	.search-controls{flex-direction:column;align-items:stretch}
+	.buttons{justify-content:stretch}
+	.btn{width:100%}
+}
