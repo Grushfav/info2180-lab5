@@ -1,2 +1,1 @@
-# info2180-lab5
-Lab5 Info2810
+#This is Lab 5 for Gavin on PHP and MySQL
