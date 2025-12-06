@@ -87,7 +87,7 @@ try{
       $rows = $stmt->fetchAll();
       respond_json($rows);
     } else {
-      // country lookup
+     
       $sql = "SELECT * FROM countries WHERE name LIKE :q LIMIT 250";
       $stmt = $pdo->prepare($sql);
       $stmt->execute([':q'=>$qterm]);
@@ -95,19 +95,18 @@ try{
       respond_json($rows);
     }
   } else {
-    // legacy HTML listing (minimal, safe-escaped)
-    $stmt = $pdo->query("SELECT * FROM countries LIMIT 200");
+    // legacy HTML listing (table) - safe-escaped
+    $stmt = $pdo->query("SELECT name, head_of_state FROM countries LIMIT 200");
     $results = $stmt->fetchAll();
-    ?>
-    <!doctype html>
-    <html><head><meta charset="utf-8"><title>Countries</title></head><body>
-    <ul>
-    <?php foreach($results as $row): ?>
-      <li><?php echo htmlspecialchars($row['name'] ?? '', ENT_QUOTES|ENT_SUBSTITUTE, 'UTF-8') . ' &mdash; ' . htmlspecialchars($row['head_of_state'] ?? '', ENT_QUOTES|ENT_SUBSTITUTE, 'UTF-8'); ?></li>
-    <?php endforeach; ?>
-    </ul>
-    </body></html>
-    <?php
+    echo '<table class="results">';
+    echo '<thead><tr><th>Name</th><th>Head of State</th></tr></thead><tbody>';
+    foreach($results as $row){
+      echo '<tr>';
+      echo '<td>' . htmlspecialchars($row['name'] ?? '', ENT_QUOTES|ENT_SUBSTITUTE, 'UTF-8') . '</td>';
+      echo '<td>' . htmlspecialchars($row['head_of_state'] ?? '', ENT_QUOTES|ENT_SUBSTITUTE, 'UTF-8') . '</td>';
+      echo '</tr>';
+    }
+    echo '</tbody></table>';
     exit;
   }
 
