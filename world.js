@@ -1,6 +1,6 @@
 // world.js reverted to minimal script to avoid DOM errors
 document.addEventListener('DOMContentLoaded', function(){
-  // Legacy HTML lookup handlers
+
   const input = document.getElementById('country');
   const lookupBtn = document.getElementById('lookup');
   const btnCountry = document.getElementById('lookup-country');

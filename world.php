@@ -1,5 +1,5 @@
 <?php
-// Simple API for lookup used by world.js
+
 $host = 'localhost';
 $username = 'lab5_user';
 $password =  'password123';
@@ -76,7 +76,7 @@ try{
 
   if(isset($_GET['format']) && $_GET['format']==='json'){
     if($type === 'cities'){
-      // join cities -> countries to return helpful fields
+      
       $sql = "SELECT cities.name AS city, cities.district, cities.population, countries.name AS country
           FROM cities
           LEFT JOIN countries ON cities.country_code = countries.code
@@ -95,7 +95,7 @@ try{
       respond_json($rows);
     }
   } else {
-    // legacy HTML listing (table) 
+   
     $stmt = $pdo->query("SELECT name, head_of_state FROM countries LIMIT 200");
     $results = $stmt->fetchAll();
     echo '<table class="results">';
