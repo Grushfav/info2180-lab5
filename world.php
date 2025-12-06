@@ -95,7 +95,7 @@ try{
       respond_json($rows);
     }
   } else {
-    // legacy HTML listing (table) - safe-escaped
+    // legacy HTML listing (table) 
     $stmt = $pdo->query("SELECT name, head_of_state FROM countries LIMIT 200");
     $results = $stmt->fetchAll();
     echo '<table class="results">';
@@ -114,7 +114,7 @@ try{
   if(isset($_GET['format']) && $_GET['format']==='json'){
     respond_json(['error'=> $e->getMessage()], 500);
   }
-  // simple error page
+ 
   http_response_code(500);
   echo '<h1>Server error</h1><pre>' . htmlspecialchars($e->getMessage()) . '</pre>';
   exit;
